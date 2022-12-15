@@ -14,7 +14,7 @@ body {
   min-height: 100vh;
   font-family: Inter, sans-serif;
   color: #6E6893;
-  background-color: #ffffff;
+  background-color: #E5E5E5;
   font-size: 14px;
   line-height: 17px;
 }
@@ -79,5 +79,18 @@ iframe {
   max-width: 1300px;
   padding: 80px 100px;
   margin: 0 auto;
-  background-color: #E5E5E5;
+}
+
+@media (max-width: 840px) {
+  .container {
+    max-width: 780px;
+    padding: 30px 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    max-width: 600px;
+    padding: 20px 20px;
+  }
 }
