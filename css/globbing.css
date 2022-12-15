@@ -15,6 +15,8 @@ body {
   font-family: Inter, sans-serif;
   color: #6E6893;
   background-color: #ffffff;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 
@@ -74,7 +76,8 @@ iframe {
 */
 
 .container {
-  max-width: 1240px;
-  padding: 0 30px;
+  max-width: 1300px;
+  padding: 80px 100px;
   margin: 0 auto;
+  background-color: #E5E5E5;
 }

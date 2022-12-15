@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  padding: 7px 20px;
+  justify-content: space-between;
+  border-bottom: solid 1px #C6C2DE;
+  margin-bottom: 20px;
+}
+
+.header__amount {
+  display: flex;
+  align-items: center;
+}
+
+.header__link {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.header__text {
+  font-weight: 500;
+  margin-right: 5px;
+}
+
+.header__cost {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+}
