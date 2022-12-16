@@ -1,0 +1,52 @@
+.table__button:hover > svg > path {
+  fill: black;
+  stroke: black;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table__data {
+  padding: 0 15px;
+  color: #25213B;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.table__row {
+  height: 60px;
+  border-top: 1px solid #D9D5EC;
+}
+
+.table_row-head {
+  background-color: #F4F2FF;
+  height: 45px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.table__head {
+  padding: 0 15px;
+}
+
+.table__data-icon {
+  padding: 0;
+}
+
+.table__button {
+  background-color: transparent;
+  border: none;
+}
+
+@media (max-width: 1024px) {
+  .table {
+    max-width: none;
+    min-width: 900px;
+  }
+
+  .wrapper {
+    overflow-x: auto;
+  }
+}
