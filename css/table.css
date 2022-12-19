@@ -1,6 +1,17 @@
 .table__button:hover > svg > path {
-  fill: black;
-  stroke: black;
+  stroke: #411089;
+}
+
+.table__button:focus {
+  outline: 1px solid #411089;
+}
+
+.table__button:active > svg > path {
+  stroke: #411089;
+}
+
+.table__button:focus {
+  outline: 1px solid #411089;
 }
 
 .table {

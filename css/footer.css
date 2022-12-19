@@ -1,0 +1,54 @@
+.footer__button:hover > svg > path {
+  stroke: #411089;
+  fill: #411089;
+}
+
+.footer__nav:hover > svg > path {
+  stroke: #411089;
+  fill: #411089;
+}
+
+.footer__nav:focus,
+.footer__button:focus {
+  outline: 1px solid #411089;
+}
+
+.footer {
+  display: flex;
+  height: 45px;
+  background: #F4F2FF;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0 50px;
+  padding-right: 20px;
+  border-radius: 0 0 8px 8px;
+}
+
+.footer__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.footer__button {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: #6E6893;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.footer__text {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.footer__nav {
+  background-color: transparent;
+  border: none;
+}

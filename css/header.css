@@ -1,3 +1,11 @@
+.header__link:hover {
+  text-shadow: 0 0 5px #a09bb6;
+}
+
+.header__link:focus {
+  outline: 1px solid #411089;
+}
+
 .header {
   display: flex;
   padding: 7px 20px;

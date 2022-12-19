@@ -1,0 +1,22 @@
+.form {
+  position: absolute;
+  top: calc(50% - 410px);
+  left: calc(50% - 396px);
+  padding: 35px 100px;
+  height: 823px;
+  width: 792px;
+  background-color: #F4F2FF;
+}
+
+.form__title {
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 24px;
+  letter-spacing: 0.1em;
+}
+
+.form__close {
+  position: absolute;
+  left: 740px;
+  top: 20px;
+}

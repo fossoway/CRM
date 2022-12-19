@@ -10,11 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
   <title>CRM</title>
   <link rel="stylesheet" href="css/index.css">
-  <script defer src="js/index.js"></script>
+  <script defer src="js/Task01.js"></script>
+  <script defer src="js/Task02.js"></script>
+  <script defer src="js/Task03.js"></script>
+  <script defer src="js/hard_task_01.js"></script>
+  <script defer src="js/hard_task_02.js"></script>
+  <!--  <script defer src="js/index.js"></script>-->
   <!--  <script defer src="js/einstein.js"></script>-->
-  <script defer src="js/tasks.js"></script>
-  <script defer src="js/tasksHard_1.js"></script>
-  <script defer src="js/tasksHard_2.js"></script>
+  <!--  <script defer src="js/tasks.js"></script>-->
+  <!--  <script defer src="js/tasksHard_1.js"></script>-->
+  <!--  <script defer src="js/tasksHard_2.js"></script>-->
 </head>
 <body>
 <div class="container">
@@ -102,7 +107,7 @@
           <td class="table__data">
             шт
           </td>
-          <td class="table__data">
+          <td class="table__data table__data-center">
             5
           </td>
           <td class="table__data">
@@ -158,7 +163,7 @@
           <td class="table__data">
             шт
           </td>
-          <td class="table__data">
+          <td class="table__data table__data-center">
             12
           </td>
           <td class="table__data">
@@ -217,7 +222,7 @@
           <td class="table__data">
             шт
           </td>
-          <td class="table__data">
+          <td class="table__data table__data-center">
             5
           </td>
           <td class="table__data">
@@ -276,7 +281,7 @@
           <td class="table__data">
             шт
           </td>
-          <td class="table__data">
+          <td class="table__data table__data-center">
             5
           </td>
           <td class="table__data">
@@ -335,7 +340,7 @@
           <td class="table__data">
             шт
           </td>
-          <td class="table__data">
+          <td class="table__data table__data-center">
             5
           </td>
           <td class="table__data">
@@ -394,7 +399,7 @@
           <td class="table__data">
             шт
           </td>
-          <td class="table__data">
+          <td class="table__data table__data-center">
             5
           </td>
           <td class="table__data">
@@ -453,7 +458,7 @@
           <td class="table__data">
             шт
           </td>
-          <td class="table__data">
+          <td class="table__data table__data-center">
             5
           </td>
           <td class="table__data">
@@ -512,7 +517,7 @@
           <td class="table__data">
             шт
           </td>
-          <td class="table__data">
+          <td class="table__data table__data-center">
             5
           </td>
           <td class="table__data">
@@ -570,7 +575,7 @@
           <td class="table__data">
             шт
           </td>
-          <td class="table__data">
+          <td class="table__data table__data-center">
             5
           </td>
           <td class="table__data">
@@ -628,7 +633,7 @@
           <td class="table__data">
             шт
           </td>
-          <td class="table__data">
+          <td class="table__data table__data-center">
             5
           </td>
           <td class="table__data">
@@ -675,9 +680,98 @@
         </tr>
       </table>
     </div>
+    <div class="footer">
+      <div class="footer__wrapper">
+        <p class="footer__text">Показывать на странице:</p>
+        <button class="footer__button">10
+          <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 5L0 0H8L4 5Z" fill="#6E6893"/>
+          </svg>
+        </button>
+      </div>
 
+      <div class="footer__wrapper">
+        <p class="footer__text">1-10</p>
+        <p class="footer__text">of</p>
+        <p class="footer__text">276</p>
+      </div>
+
+      <button class="footer__nav">
+        <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.79971 1.10636C6.42812 0.51287 5.43313 -0.426818 4.80472 0.216126L0.196378 4.51891C-0.0654595 4.7662 -0.0654595 5.21131 0.196378 5.4586L4.80472 9.81084C5.43313 10.4043 6.42812 9.46464 5.79971 8.87115L1.71504 5.01348L5.79971 1.10636Z" fill="#6E6893"/>
+        </svg>
+      </button>
+
+      <button class="footer__nav">
+        <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.200293 1.10636C-0.428118 0.51287 0.566865 -0.426818 1.19528 0.216126L5.80362 4.51891C6.06546 4.7662 6.06546 5.21131 5.80362 5.4586L1.19528 9.81084C0.566865 10.4043 -0.428118 9.46464 0.200293 8.87115L4.28496 5.01348L0.200293 1.10636Z" fill="#6E6893"/>
+        </svg>
+      </button>
+
+    </div>
   </div>
 
 </div>
+
+<section class="form">
+  <h1 class="form__title">Добавить товар</h1>
+  <div class="form__close">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 2L22 22" stroke="#6E6893" stroke-width="3" stroke-linecap="round"/>
+      <path d="M2 22L22 2" stroke="#6E6893" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <form class="form__form" action="https://jsonplaceholder.typicode.com/posts" method="post">
+    <fieldset class="form__fieldset">
+      <div class="form__item">
+        <label class="form__label" for="name">Наименование</label>
+        <input class="form__input" id="name" type="text" name="name">
+      </div>
+
+      <div class="form__item">
+        <label class="form__label" for="category">Категория</label>
+        <input class="form__input" id="category" type="text" name="category">
+      </div>
+
+      <div class="form__item">
+        <label class="form__label" for="units">Единицы измерения</label>
+        <input class="form__input" id="units" type="text" name="units">
+      </div>
+
+      <div class="form__item">
+        <label class="form__label" for="discount">Дисконт</label>
+        <div class="checkbox">
+          <input class="checkbox__input" id="discount" type="checkbox" name="discount" value="yes">
+        </div>
+        <input class="form__input form__input-discount" type="text" name="discount_size" disabled>
+      </div>
+
+      <div class="form__item">
+        <label class="form__label" for="description">Описание</label>
+        <textarea class="form__input form__input-textarea" id="description" name="description" rows="5"></textarea>
+      </div>
+
+      <div class="form__item">
+        <label class="form__label" for="count">Количество</label>
+        <input class="form__input" id="count" type="number" name="count">
+      </div>
+
+      <div class="form__item">
+        <label class="form__label" for="price">Цена</label>
+        <input class="form__input" id="price" type="number" name="price">
+      </div>
+
+      <div class="form__add">
+        <label class="form__label" for="add"></label>
+        <input class="form__input" id="add" type="file" name="add">
+      </div>
+
+    </fieldset>
+
+    <button class="form__button" type="submit">Добавить товар</button>
+
+  </form>
+
 </body>
 </html>
