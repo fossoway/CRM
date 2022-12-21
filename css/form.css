@@ -1,9 +1,22 @@
-.form {
+.overlay {
+  /*display: none;*/
+  width: 100%;
+  height: 100%;
   position: absolute;
-  top: calc(50% - 410px);
+  border:none;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.form {
+  position: fixed;
+  top: calc(50% - 310px);
   left: calc(50% - 396px);
   padding: 35px 100px;
-  height: 823px;
+  height: 613px;
   width: 792px;
   background-color: #F4F2FF;
 }
@@ -11,12 +24,152 @@
 .form__title {
   text-transform: uppercase;
   margin-top: 0;
-  margin-bottom: 24px;
+  margin-bottom: 0;
   letter-spacing: 0.1em;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.form__id {
+  font-size: 10px;
+  line-height: 12px;
+  text-transform: uppercase;
 }
 
 .form__close {
   position: absolute;
-  left: 740px;
+  right: 30px;
   top: 20px;
+  background-color: transparent;
+  border: none;
+}
+
+.form__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid 1px #C6C2DE;
+  margin-bottom: 21px;
+  padding: 0 23px 23px;
+}
+
+.form__fieldset {
+  border: none;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 28px;
+  display: grid;
+  grid-template-rows: repeat(5, 60px);
+  grid-template-columns: repeat(2, 250px);
+  gap: 12px 24px;
+  grid-template-areas:
+  "name description"
+  "category description"
+  "unit count"
+  "discount price"
+  "empty add";
+}
+
+.form__item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px 0;
+}
+
+.form__label {
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.form__input {
+  width: 250px;
+  height: 40px;
+  background-color: #F4F2FF;
+  border: none;
+  border-radius: 6px;
+}
+
+.form__item-name {
+  grid-area: name;
+}
+
+.form__item-category {
+  grid-area: category;
+}
+
+.form__item-units {
+  grid-area: unit;
+}
+
+.form__item-discount {
+  grid-area: discount;
+  gap: 0;
+}
+
+.form__label-discount {
+  margin-bottom: 5px;
+}
+
+.form__item-description {
+  grid-area: description;
+}
+
+.form__item-count {
+  grid-area: count;
+}
+
+.form__item-price {
+  grid-area: price;
+}
+
+.form__item-add {
+  grid-area: add;
+  background: #6D5BD0;
+  border-radius: 6px;
+  height: 39px;
+  cursor: pointer;
+  align-self: end;
+  text-align: center;
+  line-height: 39px;
+  color: #FFFFFF;
+}
+
+.form__input-add {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.form__input-textarea {
+  height: 112px;
+  resize: none;
+  overflow: auto;
+}
+
+.form__input-discount {
+  width: 200px;
+  align-self: flex-end;
+  padding: 0;
+  height: 40px;
+}
+
+.form__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 29px 35px;
+}
+
+.form__button {
+  background: #6D5BD0;
+  border-radius: 6px;
+  width: 200px;
+  height: 39px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  border: none;
 }
