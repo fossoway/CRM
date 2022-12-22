@@ -8,10 +8,16 @@
     const end = Math.max(n, m);
     let tryCount = Math.ceil((end - start) * 0.3);
     const number = start + Math.floor(Math.random() * (end - start + 1));
+    console.log(number);
     const tryArray = [];
     alert(`Я загадал число в диапазоне от ${start} до ${end}. У вас ${tryCount} попыток, чтобы угадать!`);
 
     const askAnswer = (number, tryCount, tryArray) => {
+      if (tryCount === 0) {
+        alert(`У вас закончились попытки`);
+        return 'Вы проиграли';
+      }
+
       const answer = prompt('Введите ваш варианта ответа:');
 
       if (!Number.isInteger(Number(answer))) {
@@ -42,14 +48,9 @@
         return askAnswer(number, tryCount, tryArray);
       }
 
-      if (answer === number) {
+      if (answer === String(number)) {
         alert(`Верно! Вы победили!`);
         return 'Победа!';
-      }
-
-      if (tryCount === 0) {
-        alert(`У вас закончились попытки`);
-        return 'Вы проиграли';
       }
 
     }
