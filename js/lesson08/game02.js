@@ -8,7 +8,6 @@
     const end = Math.max(n, m);
     let tryCount = Math.ceil((end - start) * 0.3);
     const number = start + Math.floor(Math.random() * (end - start + 1));
-    console.log(number);
     const tryArray = [];
     alert(`Я загадал число в диапазоне от ${start} до ${end}. У вас ${tryCount} попыток, чтобы угадать!`);
 
