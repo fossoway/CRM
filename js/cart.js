@@ -43,7 +43,7 @@
     print() {
       const cartStr = JSON.stringify(this);
       console.log(cartStr);
-      console.log(this.getTotalPrice());
+      console.log(`Общая стоимость корзины: ${this.getTotalPrice()}`);
     },
   }
 
