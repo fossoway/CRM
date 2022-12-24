@@ -10,7 +10,6 @@
       return this.calculateItemPrice();
     },
 
-
     increaseCount(n) {
       this.count += n;
     },
@@ -25,7 +24,8 @@
 
     calculateItemPrice() {
       const {items} = this;
-      return items.reduce((sum, item) => sum + item.productPrice * item.productCount, 0);
+      return items.reduce((sum, item) =>
+        sum + item.productPrice * item.productCount, 0);
     },
 
     add(productName, productPrice, productCount = 1) {
@@ -33,7 +33,7 @@
         productName,
         productPrice,
         productCount,
-      }
+      };
       this.items.push(item);
       this.increaseCount(productCount);
     },
@@ -43,7 +43,7 @@
       console.log(cartStr);
       console.log(`Общая стоимость корзины: ${this.totalPrice}`);
     },
-  }
+  };
 
   cart.add('watch', 2500, 4);
   cart.print();
