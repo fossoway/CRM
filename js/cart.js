@@ -4,12 +4,12 @@
 {
   const cart = {
     items: [],
-    totalPrice: 0,
     count: 0,
 
-    getTotalPrice() {
-      return this.totalPrice;
+    get totalPrice() {
+      return this.calculateItemPrice();
     },
+
 
     increaseCount(n) {
       this.count += n;
@@ -18,7 +18,6 @@
     clear() {
       const clearCart = {
         items: [],
-        totalPrice: 0,
         count: 0,
       };
       Object.assign(this, clearCart);
@@ -26,7 +25,7 @@
 
     calculateItemPrice() {
       const {items} = this;
-      this.totalPrice = items.reduce((sum, item) => sum + item.productPrice * item.productCount, 0);
+      return items.reduce((sum, item) => sum + item.productPrice * item.productCount, 0);
     },
 
     add(productName, productPrice, productCount = 1) {
@@ -37,13 +36,12 @@
       }
       this.items.push(item);
       this.increaseCount(productCount);
-      this.calculateItemPrice();
     },
 
     print() {
       const cartStr = JSON.stringify(this);
       console.log(cartStr);
-      console.log(`Общая стоимость корзины: ${this.getTotalPrice()}`);
+      console.log(`Общая стоимость корзины: ${this.totalPrice}`);
     },
   }
 
