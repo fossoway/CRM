@@ -116,12 +116,12 @@
       if (playerTurn === 'бумага' || playerTurn === 'paper') {
         if (computerTurn === 'ножницы' || computerTurn === 'scissor') {
           alert(`${PLAYER[lang]}: ${playerTurn}\n${COMP[lang]}: ${computerTurn}
-          ${WIN[lang]}`);
+          ${LOSE[lang]}`);
           result.computer += 1;
           return anotherGame(lang);
         } else if (computerTurn === 'камень' || computerTurn === 'rock') {
           alert(`${PLAYER[lang]}: ${playerTurn}\n${COMP[lang]}: ${computerTurn}
-          ${LOSE[lang]}`);
+          ${WIN[lang]}`);
           result.player += 1;
           return anotherGame(lang);
         }
@@ -130,12 +130,12 @@
       if (playerTurn === 'ножницы' || playerTurn === 'scissor') {
         if (computerTurn === 'камень' || computerTurn === 'rock') {
           alert(`${PLAYER[lang]}: ${playerTurn}\n${COMP[lang]}: ${computerTurn}
-          ${WIN[lang]}`);
+          ${LOSE[lang]}`);
           result.computer += 1;
           return anotherGame(lang);
         } else if (computerTurn === 'бумага' || computerTurn === 'paper') {
           alert(`${PLAYER[lang]}: ${playerTurn}\n${COMP[lang]}: ${computerTurn}
-          ${LOSE[lang]}`);
+          ${WIN[lang]}`);
           result.player += 1;
           return anotherGame(lang);
         }
