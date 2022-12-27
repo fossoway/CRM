@@ -93,7 +93,8 @@
         const playerTurn = Number(prompt(`Ваш ход.
         Загадайте число от 1 до ${result.player}`));
 
-        if (playerTurn < 1 || playerTurn > result.player) {
+        if (playerTurn < 1 || playerTurn > result.player
+          || Number.isNaN(playerTurn)) {
           return player();
         }
 
