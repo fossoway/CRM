@@ -8,7 +8,7 @@
     'ножницы': ['н', 'ножницы', 'ножн', 'нож'],
   };
 
-  const parity = ['even', 'odd'];
+  const parity = ['четное', 'нечетное'];
 
   const getRandomIntInclusive = (min, max) => {
     min = Math.ceil(min);
@@ -27,10 +27,21 @@
     return parity[step];
   };
 
-  const isEven = (num) => num % 2 === 0 ? 'even' : 'odd';
+  const isEven = (num) => num % 2 === 0 ? 'четное' : 'нечетное';
 
   const rps = () => {
-    let playerTurn = (prompt(`${Object.keys(figures)}?`)).toLowerCase();
+    let playerTurn = (prompt(`${Object.keys(figures)}?`));
+    if (playerTurn === null) {
+      const exit = confirm(`Хотите завершить игру?`);
+      if (exit) {
+        alert(`Игра завершена`);
+        return 'End';
+      } else {
+        return rps();
+      }
+    }
+
+    playerTurn = playerTurn.toLowerCase();
     const entries = Object.entries(figures);
     const entriesFilter = entries.filter(
         ([key, value]) => value.includes(playerTurn));
@@ -63,7 +74,29 @@
     const result = {
       player: 5,
       computer: 5,
+
+      setPlayer(n) {
+        if (this.player + n < 0) {
+          this.player = 0;
+        } else if (this.player + n > 10) {
+          this.player = 10;
+        } else {
+          this.player = this.player + n;
+        }
+      },
+
+      setComputer(n) {
+        if ((this.computer + n) < 0) {
+          this.computer = 0;
+        } else if (this.computer + n > 10) {
+          this.computer = 10;
+        } else {
+          this.computer = this.computer + n;
+        }
+      },
     };
+
+    let score = 0;
 
     const anotherGame = () => {
       const question = confirm(`Хотите сыграть еще?`);
@@ -80,18 +113,28 @@
 
     return function start() {
       const player = () => {
-        if (result.player <= 0) {
+        if (result.player === 0) {
           alert(`Вы проиграли`);
           return anotherGame();
         }
 
-        if (result.computer <= 0) {
+        if (result.computer === 0) {
           alert(`Вы победили!`);
           return anotherGame();
         }
 
         const playerTurn = Number(prompt(`Ваш ход.
         Загадайте число от 1 до ${result.player}`));
+
+        if (playerTurn === 0) {
+          const exit = confirm(`Хотите завершить игру?`);
+          if (exit) {
+            alert(`Игра завершена`);
+            return 'End';
+          } else {
+            return player();
+          }
+        }
 
         if (playerTurn < 1 || playerTurn > result.player
           || Number.isNaN(playerTurn)) {
@@ -100,15 +143,15 @@
 
         const compTurn = getParity();
         if (isEven(playerTurn) === compTurn) {
-          result.player -= playerTurn;
-          result.computer += playerTurn;
+          result.setPlayer(-playerTurn);
+          result.setComputer(playerTurn);
           alert(`Вы: ${playerTurn}\nБот: ${compTurn}\nБот угадал!
           Ваш счет: ${result.player}
           Счет бота: ${result.computer}`);
           return computer();
         } else {
-          result.player += playerTurn;
-          result.computer -= playerTurn;
+          result.setPlayer(playerTurn);
+          result.setComputer(-playerTurn);
           alert(`Вы: ${playerTurn}\nБот: ${compTurn}\nБот не угадал!
           Ваш счет: ${result.player}
           Счет бота: ${result.computer}`);
@@ -131,26 +174,37 @@
         let playerTurn = prompt(`Ход бота.
         Компьютер загадал число. Четное или нечетное?`);
 
+        if (playerTurn === null) {
+          const exit = confirm(`Хотите завершить игру?`);
+          if (exit) {
+            alert(`Игра завершена`);
+            return 'End';
+          } else {
+            return computer();
+          }
+        }
+
+        playerTurn = playerTurn.toLowerCase();
         if (playerTurn === 'четное' || playerTurn === 'чётное'
           || playerTurn === 'ч' || playerTurn === 'чет') {
-          playerTurn = 'even';
+          playerTurn = 'четное';
         } else if (playerTurn === 'нечетное' || playerTurn === 'нечётное'
           || playerTurn === 'н' || playerTurn === 'нечет') {
-          playerTurn = 'odd';
+          playerTurn = 'нечетное';
         } else {
           return computer();
         }
 
         if (isEven(compTurn) === playerTurn) {
-          result.player += compTurn;
-          result.computer -= compTurn;
+          result.setPlayer(compTurn);
+          result.setComputer(-compTurn);
           alert(`Вы: ${playerTurn}\nБот: ${compTurn}\nВы угадали!
           Ваш счет: ${result.player}
           Счет бота: ${result.computer}`);
           return player();
         } else {
-          result.player -= compTurn;
-          result.computer += compTurn;
+          result.setPlayer(-compTurn);
+          result.setComputer(compTurn);
           alert(`Вы: ${playerTurn}\nБот: ${compTurn}\nВы не угадали!
           Ваш счет: ${result.player}
           Счет бота: ${result.computer}`);
@@ -158,9 +212,12 @@
         }
       };
 
-      if (rps() === 'player') {
+      const whoWin = rps();
+      if (whoWin === 'player') {
         alert(`Ваш ход первый!`);
         return player();
+      } else if (whoWin === 'End') {
+        return 'Игра завершена';
       } else {
         alert(`Первый ход за ботом!`);
         return computer();
