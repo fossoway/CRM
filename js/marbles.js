@@ -111,6 +111,16 @@
       return start();
     };
 
+    const exit = (enter) => {
+      if (enter === 0 || enter === null) {
+        const exit = confirm(`Хотите завершить игру?`);
+        if (exit) {
+          alert(`Игра завершена`);
+          return 'End';
+        }
+      }
+    }
+
     return function start() {
       const player = () => {
         if (result.player === 0) {
@@ -126,14 +136,8 @@
         const playerTurn = Number(prompt(`Ваш ход.
         Загадайте число от 1 до ${result.player}`));
 
-        if (playerTurn === 0) {
-          const exit = confirm(`Хотите завершить игру?`);
-          if (exit) {
-            alert(`Игра завершена`);
-            return 'End';
-          } else {
-            return player();
-          }
+        if (exit(playerTurn) === 'End') {
+          return `Игра завершена`;
         }
 
         if (playerTurn < 1 || playerTurn > result.player
@@ -174,14 +178,8 @@
         let playerTurn = prompt(`Ход бота.
         Компьютер загадал число. Четное или нечетное?`);
 
-        if (playerTurn === null) {
-          const exit = confirm(`Хотите завершить игру?`);
-          if (exit) {
-            alert(`Игра завершена`);
-            return 'End';
-          } else {
-            return computer();
-          }
+        if (exit(playerTurn) === 'End') {
+          return `Игра завершена`;
         }
 
         playerTurn = playerTurn.toLowerCase();
