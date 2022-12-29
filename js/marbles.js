@@ -81,7 +81,7 @@
         } else if (this.player + n > 10) {
           this.player = 10;
         } else {
-          this.player = this.player + n;
+          this.player += n;
         }
       },
 
@@ -91,12 +91,10 @@
         } else if (this.computer + n > 10) {
           this.computer = 10;
         } else {
-          this.computer = this.computer + n;
+          this.computer += n;
         }
       },
     };
-
-    let score = 0;
 
     const anotherGame = () => {
       const question = confirm(`Хотите сыграть еще?`);
@@ -119,7 +117,7 @@
           return 'End';
         }
       }
-    }
+    };
 
     return function start() {
       const player = () => {
