@@ -1,5 +1,5 @@
 .overlay {
-  /*display: none;*/
+  display: none;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -30,7 +30,7 @@
   line-height: 29px;
 }
 
-.form__id {
+.form__numb {
   font-size: 10px;
   line-height: 12px;
   text-transform: uppercase;
@@ -172,4 +172,15 @@
   color: #FFFFFF;
   text-transform: uppercase;
   border: none;
+}
+
+.form__idnumber {
+  display: flex;
+  align-items: center;
+}
+
+.form__id {
+  border: none;
+  color: #6E6893;
+  font-size: 12px;
 }
