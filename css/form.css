@@ -184,3 +184,23 @@
   color: #6E6893;
   font-size: 12px;
 }
+
+.form__amount {
+  display: flex;
+  align-items: center;
+}
+
+.form__text {
+  font-weight: 500;
+  margin-right: 5px;
+}
+
+.form__cost {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.overlay-flex {
+  display: flex;
+}
