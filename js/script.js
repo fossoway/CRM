@@ -3,7 +3,6 @@
 
 {
   const modWindow = document.querySelector('.overlay');
-  modWindow.classList.toggle('overlay-flex');
   const headModWindow = document.querySelector('.form__title');
   const buttonIdModWindow = document.querySelector('.form__id');
   const idModWindow = document.querySelector('.form__numb');
@@ -11,4 +10,7 @@
   const checkbox = document.querySelector('.checkbox__input');
   const discount = document.querySelector('.form__input-discount');
   const totalCost = document.querySelector('.form__cost');
+
+
+  modWindow.classList.toggle('overlay-flex');
 }
