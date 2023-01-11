@@ -12,5 +12,5 @@
   const totalCost = document.querySelector('.form__cost');
 
 
-  modWindow.classList.toggle('overlay-flex');
+  // modWindow.classList.toggle('overlay-flex');
 }
