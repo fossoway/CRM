@@ -1,14 +1,37 @@
 'use strict';
 
 
+const createTd = (innerText) => {
+  const newTd = document.createElement('td');
+  newTd.classList.add('table__data');
+  newTd.append(innerText);
+  return newTd;
+}
+
+
 const createRow = (obj) => {
   const newRow = document.createElement('tr');
   newRow.className = 'table__row';
+  const deleteBtn = document.createElement('button');
+  deleteBtn.classList.add('table__button', 'delete__icon');
+  const editBtn = document.createElement('button');
+  editBtn.classList.add('table__button', 'edit__icon');
+  const imageBtn = document.createElement('button');
+  const images = obj.images;
+  if (images) {
+    imageBtn.classList.add('table__button', 'image__icon');
+  } else {
+    imageBtn.classList.add('table__button', 'no-image__icon');
+  }
+  const tdImage = createTd(imageBtn);
+  const tdDelete = createTd(deleteBtn);
+  const tdEdit = createTd(editBtn);
   const values = [obj.id, obj.title, obj.category, obj.units,
     obj.count, obj.price, obj.count * obj.price];
-  const valuesWithTd = values.map(element => '<td class="table__data">' +
-    element + '</td>').join('\n');
-  newRow.insertAdjacentHTML('afterbegin', valuesWithTd);
+  const valuesWithTd = values.map(element => createTd(element));
+  valuesWithTd.forEach(row => newRow.insertAdjacentElement('beforeend', row));
+  newRow.append(tdImage, tdEdit, tdDelete);
+  newRow.tdId = obj.id;
   return newRow;
 };
 
@@ -16,6 +39,7 @@ const createRow = (obj) => {
 const renderGoods = (goods) => {
   const render = goods.map(good => createRow(good));
   const row = document.querySelector('tbody');
+  row.innerText = '';
   render.forEach(good => row.insertAdjacentElement('beforeend', good));
 };
 
@@ -64,7 +88,7 @@ const goods = [
     }
   },
   {
-    "id": 246258248,
+    "id": 24678908,
     "title": "Витая пара PROConnect 01-0043-3-25",
     "price": 22,
     "description": "Витая пара Proconnect 01-0043-3-25 является сетевым кабелем с 4 парами проводов типа UTP, в качестве проводника в которых используется алюминий, плакированный медью CCA. Такая неэкранированная витая пара с одножильными проводами диаметром 0.50 мм широко применяется в процессе сетевых монтажных работ. С ее помощью вы сможете обеспечить развертывание локальной сети в домашних условиях или на предприятии, объединить все необходимое вам оборудование в единую сеть.",
@@ -76,7 +100,31 @@ const goods = [
       "small": "img/lan_proconnect43-3-25.jpg",
       "big": "img/lan_proconnect43-3-25-b.jpg"
     }
-  }
+  },
+  {
+    "id": 264258248,
+    "title": "Витая пара PROConnect 01-0043-3-25",
+    "price": 22,
+    "description": "Витая пара Proconnect 01-0043-3-25 является сетевым кабелем с 4 парами проводов типа UTP, в качестве проводника в которых используется алюминий, плакированный медью CCA. Такая неэкранированная витая пара с одножильными проводами диаметром 0.50 мм широко применяется в процессе сетевых монтажных работ. С ее помощью вы сможете обеспечить развертывание локальной сети в домашних условиях или на предприятии, объединить все необходимое вам оборудование в единую сеть.",
+    "category": "cables",
+    "discont": false,
+    "count": 420,
+    "units": "v",
+    "images": {
+      "small": "img/lan_proconnect43-3-25.jpg",
+      "big": "img/lan_proconnect43-3-25-b.jpg"
+    }
+  },
+  {
+    "id": 246422248,
+    "title": "Витая пара PROConnect 01-0043-3-25",
+    "price": 22,
+    "description": "Витая пара Proconnect 01-0043-3-25 является сетевым кабелем с 4 парами проводов типа UTP, в качестве проводника в которых используется алюминий, плакированный медью CCA. Такая неэкранированная витая пара с одножильными проводами диаметром 0.50 мм широко применяется в процессе сетевых монтажных работ. С ее помощью вы сможете обеспечить развертывание локальной сети в домашних условиях или на предприятии, объединить все необходимое вам оборудование в единую сеть.",
+    "category": "cables",
+    "discont": false,
+    "count": 420,
+    "units": "v",
+  },
 ];
 
 
