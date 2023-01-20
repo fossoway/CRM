@@ -31,15 +31,11 @@
     if (e.target.closest('.delete__icon')) {
       const target = e.target.closest('.table__row');
       e.target.closest('.table__row').remove();
-      let found = 0;
 
-      for (found; found < goods.length; found += 1) {
-        if (goods[found].id === target.tdId) {
-          goods.splice(found, 1);
-          console.log(goods);
+      const found = goods.findIndex(elem => elem.id === target.tdId);
+
+      goods.splice(found, 1);
+      console.log(goods);
         }
-      }
-    }
-  });
-
+      });
 }
