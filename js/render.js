@@ -32,6 +32,8 @@ const createRow = (obj) => {
   valuesWithTd.forEach(row => newRow.insertAdjacentElement('beforeend', row));
   newRow.append(tdImage, tdEdit, tdDelete);
   newRow.tdId = obj.id;
+  newRow.tdPrice = obj.price;
+  newRow.tdCount = obj.count;
   return newRow;
 };
 
@@ -129,3 +131,12 @@ const goods = [
 
 
 renderGoods(goods);
+const resetCost = () => {
+  const [...allRow] = document.querySelectorAll('.table__row');
+  const total = allRow.reduce((amount, elem) => elem.tdCount * elem.tdPrice + amount, 0);
+  headerCost.innerHTML = total;
+};
+
+resetCost();
+formClose();
+
