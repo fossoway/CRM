@@ -32,7 +32,7 @@ form.addEventListener('change', e => {
 })
 
 
-checkbox.addEventListener('input', e => {
+checkbox.addEventListener('change', e => {
   if (checkbox.checked) {
     discount.removeAttribute('disabled');
   } else {
