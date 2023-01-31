@@ -10,9 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
   <title>CRM</title>
   <link rel="stylesheet" href="css/index.css">
-  <script defer src="js/script.js"></script>
-  <script defer src="js/render.js"></script>
-  <script defer src="js/form.js"></script>
+  <script type="module" src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      formInitial();
+    })
+  </script>
 </head>
 <body>
 <div class="container">
