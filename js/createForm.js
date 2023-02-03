@@ -17,6 +17,7 @@ export const createRow = (obj) => {
   const images = obj.images;
   if (images) {
     imageBtn.classList.add('table__button', 'image__icon');
+    imageBtn.dataset.pic=images.big;
   } else {
     imageBtn.classList.add('table__button', 'no-image__icon');
   }
@@ -32,4 +33,21 @@ export const createRow = (obj) => {
   newRow.tdPrice = obj.price;
   newRow.tdCount = obj.count;
   return newRow;
+};
+
+
+export const showImage = () => {
+  const table = document.querySelector('.table');
+  table.addEventListener('click', e => {
+    if (e.target.closest('.image__icon')) {
+      const imageUrl = e.target.closest('.image__icon').dataset.pic;
+      const win = open('about:blank', '', 'width=600,height=600');
+      win.moveTo(screen.width/2 - 300, screen.height/2 - 300);
+      const image = document.createElement('img');
+      image.src = imageUrl;
+      image.width = 550;
+      image.height = 550;
+      win.document.body.append(image);
+    }
+  });
 };

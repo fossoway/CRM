@@ -1,5 +1,6 @@
 import { addDiscount, costInForm, addRowFromForm, formClose } from "./form.js";
 import { renderGoods, resetCost, deleteRow } from './render.js';
+import { showImage } from './createForm.js';
 
 
 export const goods = [
@@ -13,8 +14,8 @@ export const goods = [
     "count": 3,
     "units": "шт",
     "images": {
-      "small": "img/smrtxiaomi11t-m.jpg",
-      "big": "img/smrtxiaomi11t-b.jpg"
+      "small": "img",
+      "big": "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//100/MTA-47367451/br-m036969-03591_xiaomi-mi-12-pro-5g-12-256gb-snapdragon-8-gen-1-5g-50mp-triple-kamera-layar-amoled-wqhd-6-73-120hz-4600mah-garansi-resmi_full01.jpg"
     }
   },
   {
@@ -28,7 +29,7 @@ export const goods = [
     "units": "шт",
     "images": {
       "small": "img/cheetancar-m.jpg",
-      "big": "img/cheetancar-b.jpg"
+      "big": "https://cliff.ae/media/catalog/product/cache/aac8b4e8c6e90d36f8480a97ca23a711/2/0/200623113552mjtphq_s.jpg"
     }
   },
   {
@@ -42,7 +43,7 @@ export const goods = [
     "units": "шт",
     "images": {
       "small": "img/tvboxmecool-m.jpg",
-      "big": "img/tvboxmecool-b.jpg"
+      "big": "https://content2.rozetka.com.ua/goods/images/big/54574705.jpg"
     }
   },
   {
@@ -94,6 +95,7 @@ const init = () => {
   addRowFromForm();
   addDiscount();
   costInForm();
+  showImage();
 }
 
 
