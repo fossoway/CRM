@@ -1,3 +1,6 @@
+import { modal } from './error.js';
+
+
 export const createTd = (innerText) => {
   const newTd = document.createElement('td');
   newTd.classList.add('table__data');
@@ -6,7 +9,13 @@ export const createTd = (innerText) => {
 }
 
 
-export const createRow = (obj) => {
+export const createRow = (err, obj) => {
+  if (err) {
+    const errorMod = modal(err);
+    const form = document.querySelector('.form');
+    form.append(errorMod);
+  }
+
   const newRow = document.createElement('tr');
   newRow.className = 'table__row';
   const deleteBtn = document.createElement('button');
@@ -14,10 +23,10 @@ export const createRow = (obj) => {
   const editBtn = document.createElement('button');
   editBtn.classList.add('table__button', 'edit__icon');
   const imageBtn = document.createElement('button');
-  const images = obj.images;
+  const images = obj.image;
   if (images) {
     imageBtn.classList.add('table__button', 'image__icon');
-    imageBtn.dataset.pic=images.big;
+    imageBtn.dataset.pic=images;
   } else {
     imageBtn.classList.add('table__button', 'no-image__icon');
   }
@@ -29,9 +38,9 @@ export const createRow = (obj) => {
   const valuesWithTd = values.map(element => createTd(element));
   valuesWithTd.forEach(row => newRow.insertAdjacentElement('beforeend', row));
   newRow.append(tdImage, tdEdit, tdDelete);
-  newRow.tdId = obj.id;
   newRow.tdPrice = obj.price;
   newRow.tdCount = obj.count;
+  newRow.tdID = obj.id;
   return newRow;
 };
 

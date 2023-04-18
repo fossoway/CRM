@@ -1,97 +1,18 @@
 import { addDiscount, costInForm, addRowFromForm, formClose } from "./form.js";
 import { renderGoods, resetCost, deleteRow } from './render.js';
+import { URL, fetchRequest } from './goods.js';
 import { showImage } from './createForm.js';
 
 
-export const goods = [
-  {
-    "id": 253842678,
-    "title": "Смартфон Xiaomi 11T 8/128GB",
-    "price": 27000,
-    "description": "Смартфон Xiaomi 11T – это представитель флагманской линейки, выпущенной во второй половине 2021 года. И он полностью соответствует такому позиционированию, предоставляя своим обладателям возможность пользоваться отличными камерами, ни в чем себя не ограничивать при запуске игр и других требовательных приложений.",
-    "category": "mobile-phone",
-    "discont": false,
-    "count": 3,
-    "units": "шт",
-    "images": {
-      "small": "img",
-      "big": "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//100/MTA-47367451/br-m036969-03591_xiaomi-mi-12-pro-5g-12-256gb-snapdragon-8-gen-1-5g-50mp-triple-kamera-layar-amoled-wqhd-6-73-120hz-4600mah-garansi-resmi_full01.jpg"
-    }
-  },
-  {
-    "id": 296378448,
-    "title": "Радиоуправляемый автомобиль Cheetan",
-    "price": 4000,
-    "description": "Внедорожник на дистанционном управлении. Скорость 25км/ч. Возраст 7 - 14 лет",
-    "category": "toys",
-    "discont": 5,
-    "count": 1,
-    "units": "шт",
-    "images": {
-      "small": "img/cheetancar-m.jpg",
-      "big": "https://cliff.ae/media/catalog/product/cache/aac8b4e8c6e90d36f8480a97ca23a711/2/0/200623113552mjtphq_s.jpg"
-    }
-  },
-  {
-    "id": 215796548,
-    "title": "ТВ приставка MECOOL KI",
-    "price": 12400,
-    "description": "Всего лишь один шаг сделает ваш телевизор умным, Быстрый и умный MECOOL KI PRO, прекрасно спроектированный, сочетает в себе прочный процессор Cortex-A53 с чипом Amlogic S905D",
-    "category": "tv-box",
-    "discont": 15,
-    "count": 4,
-    "units": "шт",
-    "images": {
-      "small": "img/tvboxmecool-m.jpg",
-      "big": "https://content2.rozetka.com.ua/goods/images/big/54574705.jpg"
-    }
-  },
-  {
-    "id": 24678908,
-    "title": "Витая пара PROConnect 01-0043-3-25",
-    "price": 22,
-    "description": "Витая пара Proconnect 01-0043-3-25 является сетевым кабелем с 4 парами проводов типа UTP, в качестве проводника в которых используется алюминий, плакированный медью CCA. Такая неэкранированная витая пара с одножильными проводами диаметром 0.50 мм широко применяется в процессе сетевых монтажных работ. С ее помощью вы сможете обеспечить развертывание локальной сети в домашних условиях или на предприятии, объединить все необходимое вам оборудование в единую сеть.",
-    "category": "cables",
-    "discont": false,
-    "count": 420,
-    "units": "v",
-    "images": {
-      "small": "img/lan_proconnect43-3-25.jpg",
-      "big": "img/lan_proconnect43-3-25-b.jpg"
-    }
-  },
-  {
-    "id": 264258248,
-    "title": "Витая пара PROConnect 01-0043-3-25",
-    "price": 22,
-    "description": "Витая пара Proconnect 01-0043-3-25 является сетевым кабелем с 4 парами проводов типа UTP, в качестве проводника в которых используется алюминий, плакированный медью CCA. Такая неэкранированная витая пара с одножильными проводами диаметром 0.50 мм широко применяется в процессе сетевых монтажных работ. С ее помощью вы сможете обеспечить развертывание локальной сети в домашних условиях или на предприятии, объединить все необходимое вам оборудование в единую сеть.",
-    "category": "cables",
-    "discont": false,
-    "count": 420,
-    "units": "v",
-    "images": {
-      "small": "img/lan_proconnect43-3-25.jpg",
-      "big": "img/lan_proconnect43-3-25-b.jpg"
-    }
-  },
-  {
-    "id": 246422248,
-    "title": "Витая пара PROConnect 01-0043-3-25",
-    "price": 22,
-    "description": "Витая пара Proconnect 01-0043-3-25 является сетевым кабелем с 4 парами проводов типа UTP, в качестве проводника в которых используется алюминий, плакированный медью CCA. Такая неэкранированная витая пара с одножильными проводами диаметром 0.50 мм широко применяется в процессе сетевых монтажных работ. С ее помощью вы сможете обеспечить развертывание локальной сети в домашних условиях или на предприятии, объединить все необходимое вам оборудование в единую сеть.",
-    "category": "cables",
-    "discont": false,
-    "count": 420,
-    "units": "v",
-  },
-];
+const init = async () => {
 
-
-const init = () => {
-  renderGoods(goods);
+  const data = await fetchRequest(URL, {
+    method: 'get',
+    callback: renderGoods,
+  });
   resetCost();
   formClose();
-  deleteRow(goods);
+  deleteRow();
   addRowFromForm();
   addDiscount();
   costInForm();
