@@ -40,8 +40,11 @@
   position: absolute;
   right: 30px;
   top: 20px;
-  background-color: transparent;
+  width: 20px;
+  height: 20px;
   border: none;
+  background-image: url("../img/close.svg");
+  background-size: cover;
 }
 
 .form__wrapper {
@@ -92,7 +95,7 @@
   border-radius: 6px;
 }
 
-.form__item-name {
+.form__item-title {
   grid-area: name;
 }
 

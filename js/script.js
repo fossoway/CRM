@@ -1,4 +1,4 @@
-import { addDiscount, costInForm, addRowFromForm, formClose } from "./form.js";
+import { addRowFromForm, formOpen } from "./form.js";
 import { renderGoods, resetCost, deleteRow } from './render.js';
 import { URL, fetchRequest } from './goods.js';
 import { showImage } from './createForm.js';
@@ -11,11 +11,9 @@ const init = async () => {
     callback: renderGoods,
   });
   resetCost();
-  formClose();
+  formOpen();
   deleteRow();
-  addRowFromForm();
-  addDiscount();
-  costInForm();
+  //addRowFromForm();
   showImage();
 }
 

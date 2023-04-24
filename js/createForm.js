@@ -1,4 +1,6 @@
 import { modal } from './error.js';
+import { createModal } from './modal.js';
+import { URL, fetchRequest } from './goods.js';
 
 
 export const createTd = (innerText) => {
@@ -41,6 +43,14 @@ export const createRow = (err, obj) => {
   newRow.tdPrice = obj.price;
   newRow.tdCount = obj.count;
   newRow.tdID = obj.id;
+
+  editBtn.addEventListener('click', async () => {
+    const editItem = `${URL}/${newRow.tdID}`;
+    const good = await fetchRequest(editItem, {
+      method: 'get',
+      callback: createModal,
+    });
+  });
   return newRow;
 };
 
