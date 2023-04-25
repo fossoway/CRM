@@ -128,6 +128,17 @@
   grid-area: price;
 }
 
+.form__item-img {
+  grid-area: empty;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #D80101;
+}
+
 .form__item-add {
   grid-area: add;
   background: #6D5BD0;
@@ -144,7 +155,6 @@
   opacity: 0;
   width: 100%;
   height: 100%;
-  line-height: 39px;
   cursor: pointer;
 }
 

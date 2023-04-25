@@ -181,8 +181,11 @@ const createForm = () => {
     const fieldset = document.createElement('fieldset');
     fieldset.classList.add('form__fieldset');
 
+    const preview = document.createElement('div');
+    preview.classList.add('form__item-img');
+
     const allInput = inputList.map(createInput);
-    fieldset.append(...allInput);
+    fieldset.append(...allInput, preview);
 
     const footer = createFormFooter();
     form.append(fieldset, footer);
@@ -216,6 +219,12 @@ const completeInput = (data) => {
     const count = document.querySelector('#count');
     count.value = data.count;
 
+    const preview = document.querySelector('.form__item-img');
+    const img = document.createElement('img');
+    const src = `https://gabby-perfect-harbor.glitch.me/${data.image}`;
+    img.src = src;
+    preview.append(img);
+
     const discount = document.querySelector('.form__input-discount');
     discount.value = data.discount;
 
@@ -224,6 +233,27 @@ const completeInput = (data) => {
 
     const id = document.querySelector('.form__numb');
     id.innerText = data.id;
+}
+
+
+const previewImg = () => {
+    const file = document.querySelector('#add');
+    const preview = document.querySelector('.form__item-img');
+    const img = document.createElement('img');
+
+    file.addEventListener('change', () => {
+        if (file.files.length > 0) {
+            const src = URL.createObjectURL(file.files[0]);
+            const size = file.files[0].size;
+            img.src = src;
+            if (size > 1048576) {
+                preview.innerText = 'Изображение не должно превышать размер 1 МБ'
+            } else {
+                preview.innerText = '';
+                preview.append(img);
+            }
+        }
+    })
 }
 
 
@@ -260,6 +290,8 @@ export const createModal = async (err, data) => {
     });
 
     document.body.append(overlay);
+
+    previewImg();
 
     if (data) {
         completeInput(data);
