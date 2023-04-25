@@ -83,6 +83,9 @@ const createInput = data => {
     input.name = data.id;
     input.required = data.required;
 
+    if(data.id === 'add') {
+        input.classList.add('form__input-add');
+    };
 
     if (data.checkbox) {
         label.classList.add('form__label-discount');
