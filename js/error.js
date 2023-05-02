@@ -5,8 +5,8 @@ export const modal = (err) => {
   closeBtn.classList.add('error__close');
 
   closeBtn.addEventListener('click', () => {
-    modalWindow.classList.add('error__hidden');
-  })
+    modalWindow.remove();
+  });
 
   const errorImg = document.createElement('div');
   errorImg.classList.add('error__img');

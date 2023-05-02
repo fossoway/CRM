@@ -8,6 +8,7 @@ const inputList = [{
     id: 'title',
     type: 'text',
     required: true,
+    validation: 'cyrillic-space',
 },
 {
     div: 'form__item-category',
@@ -15,6 +16,7 @@ const inputList = [{
     id: 'category',
     type: 'text',
     required: true,
+    validation: 'cyrillic-space',
 },
 {
     div: 'form__item-units',
@@ -22,6 +24,7 @@ const inputList = [{
     id: 'units',
     type: 'text',
     required: true,
+    validation: 'cyrillic',
 },
 {
     div: 'form__item-discount',
@@ -37,6 +40,7 @@ const inputList = [{
     id: 'description',
     textarea: 5,
     required: true,
+    validation: 'cyrillic-space',
 },
 {
     div: 'form__item-count',
@@ -44,6 +48,7 @@ const inputList = [{
     id: 'count',
     type: 'number',
     required: true,
+    validation: 'numbers',
 },
 {
     div: 'form__item-price',
@@ -51,6 +56,7 @@ const inputList = [{
     id: 'price',
     type: 'number',
     required: true,
+    validation: 'numbers',
 },
 {
     div: 'form__item-add',
@@ -101,6 +107,10 @@ const createInput = data => {
         checkInput.name = 'discount';
         checkInput.value = 'yes';
 
+        input.addEventListener('input', () => {
+            input.value = input.value.replace(/[^0-9]/ig, '');
+        })
+
         checkInput.addEventListener('change', e => {
             if (checkInput.checked) {
                 input.removeAttribute('disabled');
@@ -113,6 +123,23 @@ const createInput = data => {
         checkbox.append(checkInput);
         div.append(label, checkbox, input);
         return div;
+    }
+
+    if (data.validation) {
+        if (data.validation === 'cyrillic-space') {
+            input.addEventListener('input', () => {
+                input.value = input.value.replace(/[^А-Яа-яёЁ\s]/igu, '');
+        })}
+
+        if (data.validation === 'cyrillic') {
+            input.addEventListener('input', () => {
+                input.value = input.value.replace(/[^А-Яа-яёЁ]/igu, '');
+        })}
+
+        if (data.validation === 'numbers') {
+            input.addEventListener('input', () => {
+                input.value = input.value.replace(/[^0-9]/ig, '');
+        })}
     }
 
     div.append(label, input);
@@ -254,8 +281,7 @@ const previewImg = () => {
             }
         }
     })
-}
-
+};
 
 export const createModal = async (err, data) => {
     await loadStyle('css/form.css');
