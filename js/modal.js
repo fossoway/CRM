@@ -341,6 +341,9 @@ const completeInput = (data, inputs) => {
     inputs.units.lastChild.value = data.units;
     inputs.count.lastChild.value = data.count;
 
+    const btn = document.querySelector('.form__button');
+    btn.innerText = 'сохранить';
+
     const img = document.createElement('img');
     const src = `https://gabby-perfect-harbor.glitch.me/${data.image}`;
     img.src = src;
