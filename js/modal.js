@@ -1,150 +1,8 @@
 import { addRowFromForm } from './form.js';
+import { URLserver, fetchRequest } from './goods.js';
 import { loadStyle } from './loadStyle.js';
+import { addValidationCyrillicSpace, addValidationNumeric, addValidationCyrillic } from './utils.js';
 
-
-const inputList = [{
-    div: 'form__item-title',
-    label: 'Наименование',
-    id: 'title',
-    type: 'text',
-    required: true,
-    validation: 'cyrillic-space',
-},
-{
-    div: 'form__item-category',
-    label: 'Категория',
-    id: 'category',
-    type: 'text',
-    required: true,
-    validation: 'cyrillic-space',
-},
-{
-    div: 'form__item-units',
-    label: 'Единицы измерения',
-    id: 'units',
-    type: 'text',
-    required: true,
-    validation: 'cyrillic',
-},
-{
-    div: 'form__item-discount',
-    label: 'Дисконт',
-    id: 'discount',
-    type: 'text',
-    required: true,
-    checkbox: 'checkbox',
-},
-{
-    div: 'form__item-description',
-    label: 'Описание',
-    id: 'description',
-    textarea: 5,
-    required: true,
-    validation: 'cyrillic-space',
-},
-{
-    div: 'form__item-count',
-    label: 'Количество',
-    id: 'count',
-    type: 'number',
-    required: true,
-    validation: 'numbers',
-},
-{
-    div: 'form__item-price',
-    label: 'Цена',
-    id: 'price',
-    type: 'number',
-    required: true,
-    validation: 'numbers',
-},
-{
-    div: 'form__item-add',
-    label: 'Добавить изображение',
-    id: 'add',
-    type: 'file',
-    required: false,
-}];
-
-const createInput = data => {
-    const div = document.createElement('div');
-    div.classList.add('form__item', data.div);
-
-    const label = document.createElement('label');
-    label.classList.add('form__label');
-    label.for = data.id;
-    label.innerText = data.label;
-
-    const input = data.textarea ? document.createElement('textarea') : document.createElement('input');
-
-    if (data.textarea) {
-        input.classList.add('form__input-textarea'),
-        input.rows = data.textarea
-    } else {
-        input.type = data.type
-    }
-
-    input.classList.add('form__input');
-    input.id = data.id;
-    input.name = data.id;
-    input.required = data.required;
-
-    if(data.id === 'add') {
-        input.classList.add('form__input-add');
-    };
-
-    if (data.checkbox) {
-        label.classList.add('form__label-discount');
-        input.classList.add('form__input-discount');
-        input.name = 'discount_size';
-        input.disabled = true;
-        const checkbox = document.createElement('div');
-        checkbox.classList.add('checkbox');
-        const checkInput = document.createElement('input');
-        checkInput.classList.add('checkbox__input');
-        checkInput.id = 'discount';
-        checkInput.type = 'checkbox';
-        checkInput.name = 'discount';
-        checkInput.value = 'yes';
-
-        input.addEventListener('input', () => {
-            input.value = input.value.replace(/[^0-9]/ig, '');
-        })
-
-        checkInput.addEventListener('change', e => {
-            if (checkInput.checked) {
-                input.removeAttribute('disabled');
-            } else {
-                input.value = '';
-                input.setAttribute('disabled', 'true');
-            }
-        });
-
-        checkbox.append(checkInput);
-        div.append(label, checkbox, input);
-        return div;
-    }
-
-    if (data.validation) {
-        if (data.validation === 'cyrillic-space') {
-            input.addEventListener('input', () => {
-                input.value = input.value.replace(/[^А-Яа-яёЁ\s]/igu, '');
-        })}
-
-        if (data.validation === 'cyrillic') {
-            input.addEventListener('input', () => {
-                input.value = input.value.replace(/[^А-Яа-яёЁ]/igu, '');
-        })}
-
-        if (data.validation === 'numbers') {
-            input.addEventListener('input', () => {
-                input.value = input.value.replace(/[^0-9]/ig, '');
-        })}
-    }
-
-    div.append(label, input);
-    return div;
-};
 
 const createFormHeader = () => {
     const wrapper = document.createElement('div');
@@ -199,8 +57,247 @@ const createFormFooter = () => {
     return footer;
 };
 
+const createFormInputTitle = () => {
+    const div = document.createElement('div');
+    div.classList.add('form__item', 'form__item-title');
 
-const createForm = () => {
+    const label = document.createElement('label');
+    label.classList.add('form__label');
+    label.innerText = 'Наименование';
+
+    const input = document.createElement('input');
+    input.classList.add('form__input');
+    input.type = 'text';
+    input.id = 'title';
+    input.name = 'title';
+    input.required = true;
+
+    input.addEventListener('input', () => addValidationCyrillicSpace(input));
+
+    div.append(label, input);
+
+    return div;
+};
+
+const createFormInputCategory = async () => {
+    const div = document.createElement('div');
+    div.classList.add('form__item', 'form__item-category');
+
+    const label = document.createElement('label');
+    label.classList.add('form__label');
+    label.innerText = 'Категория';
+
+    const input = document.createElement('input');
+    input.classList.add('form__input');
+    input.type = 'text';
+    input.id = 'category';
+    input.name = 'category';
+    input.required = true;
+    input.setAttribute ('list','category-list');
+
+    const datalist = document.createElement('datalist');
+    datalist.id = 'category-list';
+
+    const URLcategoryList = `${URLserver}/api/category`;
+    const optionList = await fetchRequest(URLcategoryList, {
+        method: 'get',
+    });
+
+    optionList.map(option => {
+        datalist.insertAdjacentHTML('afterbegin', `
+            <option value='${option}'></option>
+        `)
+    })
+
+    input.addEventListener('input', () => addValidationCyrillicSpace(input));
+
+    div.append(label, input, datalist);
+
+    return div;
+};
+
+const createFormInputUnits = () => {
+    const div = document.createElement('div');
+    div.classList.add('form__item', 'form__item-units');
+
+    const label = document.createElement('label');
+    label.classList.add('form__label');
+    label.innerText = 'Единицы измерения';
+
+    const input = document.createElement('input');
+    input.classList.add('form__input');
+    input.type = 'text';
+    input.id = 'units';
+    input.name = 'units';
+    input.required = true;
+
+    input.addEventListener('input', () => addValidationCyrillic(input));
+
+    div.append(label, input);
+
+    return div;
+};
+
+const createFormInputDiscount = () => {
+    const div = document.createElement('div');
+    div.classList.add('form__item', 'form__item-discount');
+
+    const label = document.createElement('label');
+    label.classList.add('form__label');
+    label.innerText = 'Дисконт';
+
+    const checkbox = document.createElement('div');
+    checkbox.classList.add('checkbox');
+
+    const checkboxInput = document.createElement('input');
+    checkboxInput.classList.add('checkbox__input');
+    checkboxInput.type = 'checkbox';
+    checkboxInput.id = 'discount';
+    checkboxInput.name = 'discount';
+    checkboxInput.value = 'yes';
+
+    checkbox.append(checkboxInput);
+
+    const input = document.createElement('input');
+    input.classList.add('form__input', 'form__input-discount');
+    input.type = 'text';
+    input.id = 'discount';
+    input.name = 'discount_size';
+    input.required = true;
+    input.disabled = true;
+
+    input.addEventListener('input', () => addValidationNumeric(input));
+
+    checkboxInput.addEventListener('change', e => {
+        if (checkboxInput.checked) {
+            input.removeAttribute('disabled');
+        } else {
+            input.value = '';
+            input.setAttribute('disabled', 'true');
+        }
+    });
+
+    div.append(label, checkbox, input);
+
+    return div;
+};
+
+const createFormInputDescription = () => {
+    const div = document.createElement('div');
+    div.classList.add('form__item', 'form__item-description');
+
+    const label = document.createElement('label');
+    label.classList.add('form__label');
+    label.innerText = 'Описание';
+
+    const textarea = document.createElement('textarea');
+    textarea.classList.add('form__input', 'form__input-textarea');
+    textarea.row = 5;
+    textarea.id = 'description';
+    textarea.name = 'description';
+    textarea.required = true;
+
+    textarea.addEventListener('input', () => addValidationCyrillicSpace(textarea));
+
+    div.append(label, textarea);
+
+    return div;
+};
+
+const createFormInputCount = () => {
+    const div = document.createElement('div');
+    div.classList.add('form__item', 'form__item-count');
+
+    const label = document.createElement('label');
+    label.classList.add('form__label');
+    label.innerText = 'Количество';
+
+    const input = document.createElement('input');
+    input.classList.add('form__input');
+    input.type = 'text';
+    input.id = 'count';
+    input.name = 'count';
+    input.required = true;
+
+    input.addEventListener('input', () => addValidationNumeric(input));
+
+    div.append(label, input);
+
+    return div;
+};
+
+const createFormInputPrice = () => {
+    const div = document.createElement('div');
+    div.classList.add('form__item', 'form__item-price');
+
+    const label = document.createElement('label');
+    label.classList.add('form__label');
+    label.innerText = 'Цена';
+
+    const input = document.createElement('input');
+    input.classList.add('form__input');
+    input.type = 'text';
+    input.id = 'price';
+    input.name = 'price';
+    input.required = true;
+
+    input.addEventListener('input', () => addValidationNumeric(input));
+
+    div.append(label, input);
+
+    return div;
+};
+
+const createFormInputAdd = () => {
+    const div = document.createElement('div');
+    div.classList.add('form__item', 'form__item-add');
+
+    const label = document.createElement('label');
+    label.classList.add('form__label');
+    label.innerText = 'Добавить изображение';
+
+    const input = document.createElement('input');
+    input.classList.add('form__input', 'form__input-add');
+    input.type = 'file';
+    input.id = 'image';
+    input.name = 'image';
+
+    div.append(label, input);
+
+    return div;
+};
+
+const createFormInputs = async () => {
+
+    const title = createFormInputTitle();
+    const category = await createFormInputCategory();
+    const units = createFormInputUnits();
+    const discount = createFormInputDiscount();
+    const description = createFormInputDescription();
+    const count = createFormInputCount();
+    const price = createFormInputPrice();
+    const add = createFormInputAdd();
+
+    const imagePreview = document.createElement('div');
+    imagePreview.classList.add('form__item-img');
+
+    const inputs = {
+        title, 
+        category, 
+        units, 
+        discount, 
+        description, 
+        count, 
+        price, 
+        add, 
+        imagePreview,
+    };
+
+    return inputs;
+};
+
+
+const createForm = async () => {
     const form = document.createElement('form');
     form.classList.add('form__form');
     form.method = 'post';
@@ -211,8 +308,18 @@ const createForm = () => {
     const preview = document.createElement('div');
     preview.classList.add('form__item-img');
 
-    const allInput = inputList.map(createInput);
-    fieldset.append(...allInput, preview);
+    const inputs = await createFormInputs();
+    fieldset.append(
+        inputs.title,
+        inputs.category,
+        inputs.units,
+        inputs.discount,
+        inputs.description,
+        inputs.count,
+        inputs.price,
+        inputs.add,
+        inputs.imagePreview
+        );
 
     const footer = createFormFooter();
     form.append(fieldset, footer);
@@ -220,43 +327,29 @@ const createForm = () => {
     return {
         form,
         cost: footer.cost,
+        inputs,
     };
 };
 
 
-const completeInput = (data) => {
-    const title = document.querySelector('#title');
-    title.value = data.title;
+const completeInput = (data, inputs) => {
+    inputs.title.lastChild.value = data.title;
+    inputs.price.lastChild.value = data.price;
+    inputs.description.lastChild.value = data.description;
+    inputs.category.children[1].value = data.category;
+    inputs.price.lastChild.value = data.price;
+    inputs.units.lastChild.value = data.units;
+    inputs.count.lastChild.value = data.count;
 
-    const price = document.querySelector('#price');
-    price.value = data.price;
-
-    const description = document.querySelector('#description');
-    description.value = data.description;
-
-    const category = document.querySelector('#category');
-    category.value = data.category;
-
-    const cost = document.querySelector('#price');
-    cost.value = data.price;
-
-    const units = document.querySelector('#units');
-    units.value = data.units;
-
-    const count = document.querySelector('#count');
-    count.value = data.count;
-
-    const preview = document.querySelector('.form__item-img');
     const img = document.createElement('img');
     const src = `https://gabby-perfect-harbor.glitch.me/${data.image}`;
     img.src = src;
-    preview.append(img);
+    inputs.imagePreview.append(img);
 
-    const discount = document.querySelector('.form__input-discount');
-    discount.value = data.discount;
+    inputs.discount.lastChild.value = data.discount;
 
     const allCost = document.querySelector('.form__cost');
-    allCost.innerText = data.price * data.count;
+    allCost.innerText = `${data.price * data.count} ₽`;
 
     const id = document.querySelector('.form__numb');
     id.innerText = data.id;
@@ -264,7 +357,7 @@ const completeInput = (data) => {
 
 
 const previewImg = () => {
-    const file = document.querySelector('#add');
+    const file = document.querySelector('#image');
     const preview = document.querySelector('.form__item-img');
     const img = document.createElement('img');
 
@@ -286,6 +379,15 @@ const previewImg = () => {
 export const createModal = async (err, data) => {
     await loadStyle('css/form.css');
 
+    if (err) {
+        console.warn(err);
+        const p = document.createElement('p');
+        p.textContent = err;
+        tbody.innerText = '';
+        tbody.append(p);
+        return;
+    }
+
     const overlay = document.createElement('div');
     overlay.classList.add('overlay', 'overlay-flex');
 
@@ -297,7 +399,7 @@ export const createModal = async (err, data) => {
     const close = document.createElement('button');
     close.classList.add('form__close');
 
-    const {form, cost} = createForm();
+    const {form, cost, inputs} = await createForm();
 
     section.append(header, close, form);
     overlay.append(section);
@@ -312,7 +414,7 @@ export const createModal = async (err, data) => {
     form.addEventListener('change', e => {
         const count = document.querySelector('#count');
         const price = document.querySelector('#price');
-        cost.innerText = count.value * price.value;
+        cost.innerText = `${count.value * price.value} ₽`;
     });
 
     document.body.append(overlay);
@@ -320,9 +422,9 @@ export const createModal = async (err, data) => {
     previewImg();
 
     if (data) {
-        completeInput(data);
-        //editGood(form, data.id);
+        completeInput(data, inputs);
+        addRowFromForm(form, overlay, data.id);
+    } else {
+        addRowFromForm(form, overlay);
     }
-
-    addRowFromForm(form, overlay);
 };

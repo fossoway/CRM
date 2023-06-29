@@ -1,4 +1,4 @@
-const URL = 'https://gabby-perfect-harbor.glitch.me/api/goods';
+const URLserver = 'https://gabby-perfect-harbor.glitch.me/api/goods';
 
 
 const fetchRequest = async (url, {
@@ -14,6 +14,7 @@ const fetchRequest = async (url, {
 
     if (body) options.body = JSON.stringify(body);
     if (headers) options.headers = headers;
+    //if (search) URL = `?search=${search}`;
 
     const response = await fetch(url, options);
 
@@ -34,4 +35,4 @@ const fetchRequest = async (url, {
   }
 };
 
-export {URL, fetchRequest};
+export {URLserver, fetchRequest};

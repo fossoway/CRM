@@ -1,6 +1,6 @@
 import { modal } from './error.js';
 import { createModal } from './modal.js';
-import { URL, fetchRequest } from './goods.js';
+import { URLserver, fetchRequest } from './goods.js';
 
 
 export const createTd = (innerText) => {
@@ -26,11 +26,12 @@ export const createRow = (err, obj) => {
   editBtn.classList.add('table__button', 'edit__icon');
   const imageBtn = document.createElement('button');
   const images = obj.image;
-  if (images) {
+  if (images === 'image/notimage.jpg') {
+    imageBtn.classList.add('table__button', 'no-image__icon');
+    imageBtn.disabled = true;
+  } else {
     imageBtn.classList.add('table__button', 'image__icon');
     imageBtn.dataset.pic=images;
-  } else {
-    imageBtn.classList.add('table__button', 'no-image__icon');
   }
   const tdImage = createTd(imageBtn);
   const tdDelete = createTd(deleteBtn);
@@ -45,7 +46,7 @@ export const createRow = (err, obj) => {
   newRow.tdID = obj.id;
 
   editBtn.addEventListener('click', async () => {
-    const editItem = `${URL}/${newRow.tdID}`;
+    const editItem = `${URLserver}/${newRow.tdID}`;
     const good = await fetchRequest(editItem, {
       method: 'get',
       callback: createModal,
@@ -59,7 +60,7 @@ export const showImage = () => {
   const table = document.querySelector('.table');
   table.addEventListener('click', e => {
     if (e.target.closest('.image__icon')) {
-      const imageUrl = e.target.closest('.image__icon').dataset.pic;
+      const imageUrl = `https://gabby-perfect-harbor.glitch.me/${e.target.closest('.image__icon').dataset.pic}`;
       const win = open('about:blank', '', 'width=600,height=600');
       win.moveTo(screen.width/2 - 300, screen.height/2 - 300);
       const image = document.createElement('img');

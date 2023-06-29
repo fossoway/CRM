@@ -1,19 +1,21 @@
-import { addRowFromForm, formOpen } from "./form.js";
+import { formOpen } from "./form.js";
 import { renderGoods, resetCost, deleteRow } from './render.js';
-import { URL, fetchRequest } from './goods.js';
+import { URLserver, fetchRequest } from './goods.js';
 import { showImage } from './createForm.js';
+import { debouncedSearch } from "./search.js";
 
 
 const init = async () => {
 
-  const data = await fetchRequest(URL, {
+  const data = await fetchRequest(URLserver, {
     method: 'get',
     callback: renderGoods,
   });
+  const searchInput = document.querySelector('.cms__input');
+  searchInput.addEventListener('input', debouncedSearch);
   resetCost();
   formOpen();
   deleteRow();
-  //addRowFromForm();
   showImage();
 }
 
